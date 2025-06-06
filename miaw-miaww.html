@@ -1,0 +1,253 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profil Lucu & Galeri</title>
+  <style>
+    :root {
+      --bg-light: #f4f4f9;
+      --bg-dark: #1e1e2e;
+      --text-light: #333;
+      --text-dark: #f1f1f1;
+      --accent: #7c98ab;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: var(--bg-light);
+      color: var(--text-light);
+      transition: background 0.3s, color 0.3s;
+      position: relative;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    .background-balls {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .ball {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.4;
+    }
+
+    @keyframes moveRightDown {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(200vw, 200vh); }
+    }
+
+    @keyframes moveLeftUp {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-200vw, -200vh); }
+    }
+
+    header {
+      background-color: var(--accent);
+      padding: 1rem;
+      text-align: center;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    .theme-toggle {
+      margin: 1rem;
+      text-align: center;
+    }
+
+    .theme-toggle button {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      background-color: var(--accent);
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 1rem;
+    }
+
+    .profile {
+      text-align: center;
+    }
+
+    .profile img {
+      width: 200px;
+      border-radius: 50%;
+      border: 5px solid var(--accent);
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .gallery .item {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .gallery img,
+    .gallery video {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border: 4px dashed var(--accent);
+      border-radius: 10px;
+      transition: transform 0.3s;
+    }
+
+    .gallery img:hover,
+    .gallery video:hover {
+      transform: scale(1.05) rotate(-2deg);
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .modal-content a {
+      display: block;
+      margin: 1rem 0;
+      text-decoration: none;
+      color: var(--text-light);
+      font-weight: bold;
+    }
+
+    body.dark {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    body.dark .modal-content {
+      background: #333;
+      color: #fff;
+    }
+
+    body.dark .modal-content a {
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="background-balls" id="bgBalls"></div>
+
+  <header>
+    Welcome To Miaw Maww!
+  </header>
+
+  <div class="theme-toggle">
+    <button onclick="toggleTheme()">Theme</button>
+  </div>
+
+  <div class="container">
+    <section class="profile">
+      <h2>Nanda Quila</h2>
+      <img src="https://i.supa.codes/4jkIKC" alt="Nanda Quila" />
+    </section>
+
+    <section class="gallery">
+      <h2 style="width: 100%; text-align:center">Galeri Miaw Miaw</h2>
+
+      <div class="item" onclick="showOptions()">
+        <img src="https://i.supa.codes/LhpWFA" alt="Galeri 1" />
+      </div>
+
+      <div class="item" onclick="showOptions()">
+        <img src="https://i.supa.codes/GIIW2r" alt="Galeri 2" />
+      </div>
+
+      <div class="item" onclick="showOptions()">
+        <img src="https://i.supa.codes/_V2bOQ" alt="Galeri 3">
+      </div>
+
+      <div class="item" onclick="showOptions()">
+        <video src="https://i.supa.codes/hPCtBZ" controls></video>
+      </div>
+
+      <div class="item" onclick="showOptions()">
+        <img src="https://i.supa.codes/b0pTjn" alt="Galeri 5">
+      </div>
+
+      <div class="item" onclick="showOptions()">
+        <img src="https://i.supa.codes/peE5JP" alt="Galeri 6">
+      </div>
+    </section>
+  </div>
+
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <h3>Pilih Platform untuk Kirim Pesan</h3>
+      <a href="https://wa.me/6282113148932" target="_blank" id="waLink">WhatsApp</a>
+      <a href="https://www.instagram.com/dhiekaaquilaa?igsh=YXF3eWhjdXQzYWE0" target="_blank" id="igLink">Instagram</a>
+      <a href="https://www.tiktok.com/@apaajagtau5?_t=ZS-8wugESj53ge&_r=1" target="_blank" id="ttLink">TikTok</a>
+      <button onclick="hideOptions()">Tutup</button>
+    </div>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle('dark');
+    }
+
+    function showOptions() {
+      document.getElementById('modal').style.display = 'flex';
+    }
+
+    function hideOptions() {
+      document.getElementById('modal').style.display = 'none';
+    }
+
+    const bg = document.getElementById('bgBalls');
+    for (let i = 0; i < 120; i++) {
+      const ball = document.createElement('div');
+      const size = Math.random() * 20 + 10;
+      ball.classList.add('ball');
+      ball.style.width = `${size}px`;
+      ball.style.height = `${size}px`;
+      ball.style.left = `${Math.random() * 100}vw`;
+      ball.style.top = `${Math.random() * 100}vh`;
+      ball.style.background = `rgba(${Math.floor(Math.random()*255)}, ${Math.floor(Math.random()*255)}, ${Math.floor(Math.random()*255)}, 0.4)`;
+      ball.style.animation = `${Math.random() > 0.5 ? 'moveRightDown' : 'moveLeftUp'} ${20 + Math.random() * 10}s linear infinite`;
+      bg.appendChild(ball);
+    }
+  </script>
+</body>
+</html>
